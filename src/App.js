@@ -5,7 +5,7 @@ import Footer from './footer/Footer';
 
 class App extends React.Component {
   state = {
-    todos: JSON.parse(localStorage.todos) || [],
+    todos: [...JSON.parse(localStorage.todos)],
     activeFilter: 'activeFilterAll',
   }
 
