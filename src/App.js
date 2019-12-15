@@ -5,7 +5,13 @@ import Footer from './footer/Footer';
 
 class App extends React.Component {
   state = {
-    todos: [...JSON.parse(localStorage.todos)],
+    todos: (() => {
+      if (localStorage.todos !== undefined) {
+        return [...JSON.parse(localStorage.todos)];
+      }
+
+      return [];
+    })(),
     activeFilter: 'activeFilterAll',
   }
 
