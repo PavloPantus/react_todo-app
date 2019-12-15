@@ -90,6 +90,7 @@ class TodosList extends React.Component {
 
     this.setState({
       currentEditingItemId: '',
+      currentEditingvalue: '',
     });
   }
 
@@ -138,10 +139,8 @@ class TodosList extends React.Component {
                       ? (
                         <input
                           className="edit"
-                          value={this.state.currentEditingvalue
-                          || AppState.todos
-                            .find(todoSearched => todoSearched.id === todo.id)
-                            .content
+                          value={
+                            this.state.currentEditingvalue
                           }
                           onChange={this.handleChangeEditingInput}
                           onBlur={this.OnBlurEditingInput}
@@ -154,6 +153,10 @@ class TodosList extends React.Component {
                             this.setState(
                               {
                                 currentEditingItemId: todo.id,
+                                currentEditingvalue: AppState.todos
+                                  .find(todoSearched => (
+                                    todoSearched.id === todo.id))
+                                  .content,
                               }
                             );
                           }}

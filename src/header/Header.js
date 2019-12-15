@@ -11,9 +11,15 @@ class Header extends React.Component {
   }
 
   handleInputEnter = (event) => {
+    if (event.key === 'Enter' && this.state.currentInputValue !== '') {
+      this.SaveCurrentInput();
+    }
+  }
+
+  SaveCurrentInput = () => {
     const unicKey = (+new Date());
 
-    if (event.key === 'Enter' && this.state.currentInputValue !== '') {
+    if (this.state.currentInputValue !== '') {
       this.props.AppSetState(
         prevState => ({
           todos: [...prevState.todos,
@@ -27,7 +33,6 @@ class Header extends React.Component {
           ],
         })
       );
-
       this.setState({ currentInputValue: '' });
     }
   }
@@ -37,13 +42,19 @@ class Header extends React.Component {
       <header className="header">
         <h1>todos</h1>
 
-        <input
-          value={this.state.currentInputValue}
-          onChange={this.handleInputChange}
-          onKeyPress={this.handleInputEnter}
-          className="new-todo"
-          placeholder="What needs to be done?"
-        />
+        <form id="new-todo-form" action="#" method="#" name="current-input">
+          <input
+            value={this.state.currentInputValue}
+            onChange={this.handleInputChange}
+            onKeyPress={this.handleInputEnter}
+            onBlur={() => {
+              document.querySelector('#new-todo-form').submit();
+              this.SaveCurrentInput();
+            }}
+            className="new-todo"
+            placeholder="What needs to be done?"
+          />
+        </form>
       </header>
     );
   }

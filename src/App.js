@@ -5,8 +5,12 @@ import Footer from './footer/Footer';
 
 class App extends React.Component {
   state = {
-    todos: [],
+    todos: JSON.parse(localStorage.todos) || [],
     activeFilter: 'activeFilterAll',
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
   }
 
   AppSetState = (addItToAppState) => {
@@ -16,7 +20,10 @@ class App extends React.Component {
   render() {
     return (
       <section className="todoapp">
-        <Header AppSetState={this.AppSetState} />
+        <Header
+          AppSetState={this.AppSetState}
+          AppState={this.state}
+        />
 
         <Main
           AppSetState={this.AppSetState}
