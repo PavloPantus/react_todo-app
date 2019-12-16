@@ -6,7 +6,7 @@ class Main extends React.Component {
   toogleAll = () => {
     this.props.AppSetState((prevState) => {
       const checkeorNot = prevState.todos
-        .find(onetodo => onetodo.checked === false);
+        .some(onetodo => !onetodo.checked);
 
       return {
         todos: prevState.todos.map(

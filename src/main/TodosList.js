@@ -41,13 +41,7 @@ class TodosList extends React.Component {
     this.props.AppSetState(
       prevState => ({
         todos: [...prevState.todos
-          .filter((todo) => {
-            if (todo.id === Id) {
-              return false;
-            }
-
-            return true;
-          }),
+          .filter(todo => todo.id !== Id),
         ],
       })
     );
@@ -56,9 +50,9 @@ class TodosList extends React.Component {
   filters = filter => ({
     activeFilterAll: () => true,
 
-    activeFilterActive: todo => todo.checked === false,
+    activeFilterActive: todo => !todo.checked,
 
-    activeFilterCompleted: todo => todo.checked === true,
+    activeFilterCompleted: todo => todo.checked,
   }[filter]);
 
   handleChangeEditingInput = (event) => {

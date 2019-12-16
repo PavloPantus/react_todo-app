@@ -3,44 +3,26 @@ import PropTypes from 'prop-types';
 
 const FiltersList = ({ AppSetState, AppState }) => (
   <ul className="filters">
-    <li>
-      <a
-        href="#/"
-        onClick={() => {
-          AppSetState({ activeFilter: 'activeFilterAll' });
-        }}
-        className={AppState.activeFilter === 'activeFilterAll'
-          ? ('selected') : ''}
-      >
-            All
-      </a>
-    </li>
+    {
+      Object.entries(AppState.FILTER_TYPES)
+        .map(
+          ([name, value]) => (
+            <li key={name}>
+              <a
+                href="#/"
+                onClick={() => {
+                  AppSetState({ activeFilter: value });
+                }}
+                className={AppState.activeFilter === value
+                  ? 'selected' : ''}
+              >
+                {name}
+              </a>
+            </li>
+          )
 
-    <li>
-      <a
-        href="#/active"
-        onClick={() => {
-          AppSetState({ activeFilter: 'activeFilterActive' });
-        }}
-        className={AppState.activeFilter === 'activeFilterActive'
-          ? ('selected') : ''}
-      >
-            Active
-      </a>
-    </li>
-
-    <li>
-      <a
-        href="#/completed"
-        onClick={() => {
-          AppSetState({ activeFilter: 'activeFilterCompleted' });
-        }}
-        className={AppState.activeFilter === 'activeFilterCompleted'
-          ? ('selected') : ''}
-      >
-            Completed
-      </a>
-    </li>
+        )
+    }
   </ul>
 );
 

@@ -13,6 +13,12 @@ class App extends React.Component {
       return [];
     })(),
     activeFilter: 'activeFilterAll',
+
+    FILTER_TYPES: {
+      All: 'activeFilterAll',
+      Active: 'activeFilterActive',
+      Completed: 'activeFilterCompleted',
+    },
   }
 
   componentDidUpdate() {
@@ -38,7 +44,11 @@ class App extends React.Component {
           activeFilter={this.state.activeFilter}
         />
 
-        <Footer AppSetState={this.AppSetState} AppState={this.state} />
+        <Footer
+          AppSetState={this.AppSetState}
+          AppState={this.state}
+          FILTER_TYPES={this.state.FILTER_TYPES}
+        />
       </section>
     );
   }

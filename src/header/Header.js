@@ -10,22 +10,16 @@ class Header extends React.Component {
     this.setState({ currentInputValue: event.target.value });
   }
 
-  handleInputEnter = (event) => {
-    if (event.key === 'Enter' && this.state.currentInputValue !== '') {
-      this.SaveCurrentInput();
-    }
-  }
-
   SaveCurrentInput = () => {
-    const unicKey = (+new Date());
+    const uniqueKey = (+new Date());
 
     if (this.state.currentInputValue !== '') {
       this.props.AppSetState(
         prevState => ({
           todos: [...prevState.todos,
             {
-              key: unicKey,
-              id: unicKey,
+              key: uniqueKey,
+              id: uniqueKey,
               content: this.state.currentInputValue,
               checked: false,
 
@@ -42,11 +36,16 @@ class Header extends React.Component {
       <header className="header">
         <h1>todos</h1>
 
-        <form id="new-todo-form" action="#" method="#" name="current-input">
+        <form
+          onSubmit={this.SaveCurrentInput}
+          id="new-todo-form"
+          action=""
+          method=""
+          name="current-input"
+        >
           <input
             value={this.state.currentInputValue}
             onChange={this.handleInputChange}
-            onKeyPress={this.handleInputEnter}
             onBlur={() => {
               document.querySelector('#new-todo-form').submit();
               this.SaveCurrentInput();
