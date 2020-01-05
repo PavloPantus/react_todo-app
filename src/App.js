@@ -29,6 +29,8 @@ class App extends React.Component {
     this.setState(addItToAppState);
   }
 
+  /**/
+
   render() {
     return (
       <section className="todoapp">

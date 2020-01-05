@@ -10,7 +10,7 @@ class Header extends React.Component {
     this.setState({ currentInputValue: event.target.value });
   }
 
-  SaveCurrentInput = () => {
+  saveCurrentInput = () => {
     const uniqueKey = (+new Date());
 
     if (this.state.currentInputValue !== '') {
@@ -37,7 +37,11 @@ class Header extends React.Component {
         <h1>todos</h1>
 
         <form
-          onSubmit={this.SaveCurrentInput}
+          onSubmit={(event) => {
+            event.preventDefault();
+            this.saveCurrentInput();
+          }
+          }
           id="new-todo-form"
           action=""
           method=""
@@ -47,8 +51,7 @@ class Header extends React.Component {
             value={this.state.currentInputValue}
             onChange={this.handleInputChange}
             onBlur={() => {
-              document.querySelector('#new-todo-form').submit();
-              this.SaveCurrentInput();
+              this.saveCurrentInput();
             }}
             className="new-todo"
             placeholder="What needs to be done?"
